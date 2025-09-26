@@ -21,7 +21,7 @@ class SubjectAdapter(
         val tvId: TextView = view.findViewById(R.id.tvId)
         val tvName: TextView = view.findViewById(R.id.tvName)
         val tvTeacher: TextView = view.findViewById(R.id.tvTeacher)
-        val btnEdit: Button = view.findViewById(R.id.btnEdit)
+        val btnManage: Button = view.findViewById(R.id.btnManage)
         val btnEvaluations: Button = view.findViewById(R.id.btnEvaluations)
     }
 
@@ -38,11 +38,9 @@ class SubjectAdapter(
         holder.tvTeacher.text = subject.teacher?.name ?: "Sin asignar"
 
         // Mostrar botón de editar solo si es ADMIN
-        holder.btnEdit.visibility = if (userRole == "ADMIN") View.VISIBLE else View.GONE
-//        holder.btnEvaluations.visibility = if (userRole == "TEACHER") View.VISIBLE else View.GONE
-//        holder.btnViewGrades.visibility = if (userRole == "STUDENT") View.VISIBLE else View.GONE
-
-        holder.btnEdit.setOnClickListener {
+        holder.btnManage.visibility = if (userRole == "ADMIN") View.VISIBLE else View.GONE
+        
+        holder.btnManage.setOnClickListener {
             val intent = Intent(holder.itemView.context, EditSubjectActivity::class.java)
             intent.putExtra("SUBJECT_ID", subject.id)
             holder.itemView.context.startActivity(intent)
@@ -55,11 +53,6 @@ class SubjectAdapter(
             holder.itemView.context.startActivity(intent)
         }
 
-//        holder.btnViewGrades.setOnClickListener {
-//            val intent = Intent(holder.itemView.context, SubjectDetailActivity::class.java)
-//            intent.putExtra("SUBJECT_ID", subject.id)
-//            holder.itemView.context.startActivity(intent)
-//        }
     }
 
     override fun getItemCount(): Int = subjects.size
