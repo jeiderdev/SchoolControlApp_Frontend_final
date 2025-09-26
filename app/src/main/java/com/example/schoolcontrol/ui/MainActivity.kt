@@ -5,9 +5,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.schoolcontrol.R
-import com.example.schoolcontrol.ui.fragments.StudentSubjectsFragment
 import com.example.schoolcontrol.ui.fragments.SubjectsFragment
-import com.example.schoolcontrol.ui.fragments.TeacherSubjectsFragment
 import com.example.schoolcontrol.ui.fragments.UsersFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -34,11 +32,11 @@ class MainActivity : AppCompatActivity() {
             }
             "TEACHER" -> {
                 bottomNav.inflateMenu(R.menu.bottom_menu_teacher)
-                openFragment(TeacherSubjectsFragment()) // Default
+                openFragment(SubjectsFragment()) // Default
             }
             "STUDENT" -> {
                 bottomNav.inflateMenu(R.menu.bottom_menu_student)
-                openFragment(StudentSubjectsFragment()) // Default
+                openFragment(SubjectsFragment()) // Default
             }
         }
 
@@ -47,11 +45,7 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.nav_users -> openFragment(UsersFragment())
                 R.id.nav_subjects -> {
-                    when (userRole) {
-                        "ADMIN" -> openFragment(SubjectsFragment()) // Admin ve todas
-                        "TEACHER" -> openFragment(TeacherSubjectsFragment()) // Solo las suyas
-                        "STUDENT" -> openFragment(StudentSubjectsFragment()) // Solo matriculadas
-                    }
+                       openFragment(SubjectsFragment())
                 }
                 R.id.nav_profile -> startActivity(Intent(this, ProfileActivity::class.java))
             }

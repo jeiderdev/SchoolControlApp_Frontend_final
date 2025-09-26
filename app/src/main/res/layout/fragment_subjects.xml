@@ -2,23 +2,19 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:padding="16dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
-    <!-- Botón para crear nueva materia (solo admins) -->
     <Button
         android:id="@+id/btnAddSubject"
-        android:text="Crear Materia"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Agregar Materia"
         android:layout_marginBottom="16dp"/>
 
-    <!-- Lista de materias -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSubjects"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
-
+        android:layout_height="match_parent"/>
 </LinearLayout>

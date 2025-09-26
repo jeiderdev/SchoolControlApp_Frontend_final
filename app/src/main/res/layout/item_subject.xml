@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical">
+
+    <!-- Información de la materia -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tvId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ID"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Materia"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tvTeacher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profesor"/>
+    </LinearLayout>
+
+    <!-- Botones -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginStart="8dp">
+
+        <Button
+            android:id="@+id/btnEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Editar"/>
+
+        <Button
+            android:id="@+id/btnManageEvaluations"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Editar Evaluaciones"/>
+
+        <Button
+            android:id="@+id/btnManageGrades"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Editar Notas"/>
+
+        <Button
+            android:id="@+id/btnViewGrades"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ver Notas"/>
+    </LinearLayout>
+
+</LinearLayout>

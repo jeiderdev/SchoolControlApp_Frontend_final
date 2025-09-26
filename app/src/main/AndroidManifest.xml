@@ -15,8 +15,8 @@
         <activity android:name=".ui.ResetPasswordActivity" />
         <activity android:name=".ui.MainActivity" />
         <activity android:name=".ui.ProfileActivity" />
-        <activity android:name=".ui.InstitutionalEmailsActivity" />
-        <activity android:name=".ui.UsersActivity" />
+        <activity android:name=".ui.CreateSubjectActivity" />
+        <activity android:name=".ui.EditSubjectActivity"/>
 
         <activity android:name=".ui.LoginActivity"
             android:exported="true">

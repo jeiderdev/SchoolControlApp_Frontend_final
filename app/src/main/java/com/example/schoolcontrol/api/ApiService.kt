@@ -24,11 +24,26 @@ interface ApiService {
     @GET("users/teachers")
     suspend fun getTeachers(): List<UserDto>
 
+    @GET("users/students")
+    suspend fun getStudents(): List<UserDto>
+
     @GET("/subjects")
     suspend fun getSubjects(): List<SubjectDto>
 
     @POST("/subjects")
     suspend fun createSubject(@Body subject: CreateSubjectDto): SubjectDto
+
+    @GET("/subjects/{id}")
+    suspend fun getSubjectById(@Path("id") id: Int): SubjectDto
+
+    @PUT("/subjects/{id}")
+    suspend fun updateSubject(@Path("id") id: Int, @Body subject: UpdateSubjectDto): SubjectDto
+
+    @POST("/enrollments")
+    suspend fun enrollStudent(@Body enrollment: CreateEnrollmentDto): EnrollmentDto
+
+    @GET("/enrollments/subject/{subjectId}")
+    suspend fun getEnrollmentsBySubject(@Path("subjectId") subjectId: Int): List<EnrollmentDto>
 
     @POST("forgot-password")
     suspend fun forgotPassword(@Body body: ForgotPasswordRequest): ForgotResponse
@@ -52,34 +67,5 @@ interface ApiService {
     @GET("ranking")
     suspend fun getRanking(): Response<List<RankingItem>>
 
-    // Teachers emails (list)
-    @GET("teachers/emails")
-    suspend fun getTeachersEmails(): Response<List<TeacherEmail>>
-
-    // Institutional emails endpoints (if present in backend)
-    @GET("institutional-emails")
-    suspend fun getInstitutionalEmails(): Response<List<InstitutionalEmailResponse>>
-
-    @POST("institutional-emails")
-    suspend fun createInstitutionalEmail(@Body body: InstitutionalEmailRequest): Response<InstitutionalEmailResponse>
-
-    @DELETE("institutional-emails/{id}")
-    suspend fun deleteInstitutionalEmail(@Path("id") id: Int): Response<BasicResponse>
-
-    // Users (admin)
-    @GET("users")
-    suspend fun getUsers(): Response<List<UserResponse>>
-
-    @PUT("users/{id}/role")
-    suspend fun updateUserRole(@Path("id") userId: Int, @Body request: RoleUpdateRequest): Response<UserResponse>
-
-    @PUT("users/{id}/email")
-    suspend fun updateUserEmail(@Path("id") userId: Int, @Body payload: Map<String, String>): Response<UserResponse>
-
-    @DELETE("users/{id}")
-    suspend fun deleteUser(@Path("id") userId: Int): Response<BasicResponse>
-
-    @POST("confirm")
-    suspend fun confirmAccount(@Body request: ConfirmRequest): Response<MessageResponse>
 }
 

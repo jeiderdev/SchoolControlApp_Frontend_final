@@ -10,9 +10,9 @@ data class SubjectDto(
     @SerializedName("teacher_id")
     val teacherId: Int? = null,
     @SerializedName("created_at")
-    val createdAt: LocalDateTime,
+    val createdAt: String,
     @SerializedName("updated_at")
-    val updatedAt: LocalDateTime,
+    val updatedAt: String,
     val teacher: UserDto? = null,
     val enrollments: List<EnrollmentDto> = emptyList(),
     val evaluations: List<EvaluationDto> = emptyList()
