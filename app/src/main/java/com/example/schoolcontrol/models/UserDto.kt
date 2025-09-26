@@ -1,5 +1,7 @@
 package com.example.schoolcontrol.models
 
+import com.google.gson.annotations.SerializedName
+
 data class UserDto(
     val id: Int,
     val name: String,
@@ -11,5 +13,8 @@ data class UserDto(
     val active: Boolean,
     val subjects: List<SubjectDto> = emptyList(),
     val enrollments: List<EnrollmentDto> = emptyList(),
-    val grades: List<GradeDto> = emptyList()
+    val grades: List<GradeDto> = emptyList(),
+    @SerializedName("created_at") val createdAt: String,
+    @SerializedName("updated_at") val updatedAt: String
+
 )
