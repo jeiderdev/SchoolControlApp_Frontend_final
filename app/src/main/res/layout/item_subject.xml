@@ -50,22 +50,16 @@
             android:text="Editar"/>
 
         <Button
-            android:id="@+id/btnManageEvaluations"
+            android:id="@+id/btnEvaluations"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Editar Evaluaciones"/>
+            android:text="Evaluaciones"/>
 
-        <Button
-            android:id="@+id/btnManageGrades"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Editar Notas"/>
-
-        <Button
-            android:id="@+id/btnViewGrades"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ver Notas"/>
+<!--        <Button-->
+<!--            android:id="@+id/btnViewGrades"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Ver Notas"/>-->
     </LinearLayout>
 
 </LinearLayout>

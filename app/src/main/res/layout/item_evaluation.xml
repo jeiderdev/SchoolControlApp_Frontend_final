@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_card">
+
+    <TextView
+        android:id="@+id/tvEvalName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Evaluación"
+        android:textStyle="bold"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tvEvalDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Descripción"/>
+
+    <TextView
+        android:id="@+id/tvEvalGrade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nota: N/A"
+        android:textStyle="bold"
+        android:textSize="16sp"/>
+
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
+
+        <Button
+            android:id="@+id/btnViewGrades"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ver Notas"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/btnEditGrades"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Editar Notas"
+            android:visibility="gone"
+            android:layout_marginStart="8dp"/>
+    </LinearLayout>
+</LinearLayout>
+

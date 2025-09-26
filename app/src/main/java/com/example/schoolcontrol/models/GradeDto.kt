@@ -9,7 +9,7 @@ data class GradeDto(
     val studentId: Int,
     @SerializedName("evaluation_id")
     val evaluationId: Int,
-    val score: Float,
+    val score: Double,
     @SerializedName("created_at")
     val createdAt: LocalDateTime,
     @SerializedName("updated_at")

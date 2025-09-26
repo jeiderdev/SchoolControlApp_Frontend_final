@@ -1,5 +1,5 @@
 package com.example.schoolcontrol.models
 
 data class UpdateGradeDto(
-    val score: Float? = null
+    val score: Double? = null
 )

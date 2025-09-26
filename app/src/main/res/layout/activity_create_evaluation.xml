@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Crear Evaluación"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"/>
+
+    <EditText
+        android:id="@+id/etEvalName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre de la evaluación"
+        android:inputType="text"/>
+
+    <EditText
+        android:id="@+id/etEvalDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Descripción"
+        android:inputType="textMultiLine"
+        android:minLines="3"
+        android:layout_marginTop="8dp"/>
+
+    <EditText
+        android:id="@+id/etEvalPercentage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Porcentaje"
+        android:inputType="number"
+        android:layout_marginTop="8dp"/>
+
+    <Button
+        android:id="@+id/btnSaveEvaluation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Guardar"
+        android:layout_marginTop="16dp"/>
+</LinearLayout>

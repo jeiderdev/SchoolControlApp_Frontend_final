@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolcontrol.R
 import com.example.schoolcontrol.models.SubjectDto
 import com.example.schoolcontrol.ui.EditSubjectActivity
+import com.example.schoolcontrol.ui.SubjectDetailActivity
 
 class SubjectAdapter(
     private val subjects: List<SubjectDto>,
@@ -21,9 +22,7 @@ class SubjectAdapter(
         val tvName: TextView = view.findViewById(R.id.tvName)
         val tvTeacher: TextView = view.findViewById(R.id.tvTeacher)
         val btnEdit: Button = view.findViewById(R.id.btnEdit)
-        val btnManageEvaluations: Button = view.findViewById(R.id.btnManageEvaluations)
-        val btnManageGrades: Button = view.findViewById(R.id.btnManageGrades)
-        val btnViewGrades: Button = view.findViewById(R.id.btnViewGrades)
+        val btnEvaluations: Button = view.findViewById(R.id.btnEvaluations)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubjectViewHolder {
@@ -40,9 +39,8 @@ class SubjectAdapter(
 
         // Mostrar botón de editar solo si es ADMIN
         holder.btnEdit.visibility = if (userRole == "ADMIN") View.VISIBLE else View.GONE
-        holder.btnManageEvaluations.visibility = if (userRole == "TEACHER") View.VISIBLE else View.GONE
-        holder.btnManageGrades.visibility = if (userRole == "TEACHER") View.VISIBLE else View.GONE
-        holder.btnViewGrades.visibility = if (userRole == "STUDENT") View.VISIBLE else View.GONE
+//        holder.btnEvaluations.visibility = if (userRole == "TEACHER") View.VISIBLE else View.GONE
+//        holder.btnViewGrades.visibility = if (userRole == "STUDENT") View.VISIBLE else View.GONE
 
         holder.btnEdit.setOnClickListener {
             val intent = Intent(holder.itemView.context, EditSubjectActivity::class.java)
@@ -51,18 +49,17 @@ class SubjectAdapter(
         }
 
         // Click Evaluations
-        holder.btnManageEvaluations.setOnClickListener {
-            // Abrir actividad de editar evaluaciones
+        holder.btnEvaluations.setOnClickListener {
+            val intent = Intent(holder.itemView.context, SubjectDetailActivity::class.java)
+            intent.putExtra("SUBJECT_ID", subject.id)
+            holder.itemView.context.startActivity(intent)
         }
 
-        // Click Grades
-        holder.btnManageGrades.setOnClickListener {
-            // Abrir actividad de editar notas
-        }
-
-        holder.btnViewGrades.setOnClickListener {
-            // Abrir actividad de ver notas
-        }
+//        holder.btnViewGrades.setOnClickListener {
+//            val intent = Intent(holder.itemView.context, SubjectDetailActivity::class.java)
+//            intent.putExtra("SUBJECT_ID", subject.id)
+//            holder.itemView.context.startActivity(intent)
+//        }
     }
 
     override fun getItemCount(): Int = subjects.size

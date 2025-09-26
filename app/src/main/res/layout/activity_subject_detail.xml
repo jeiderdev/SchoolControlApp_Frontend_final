@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Info de la materia -->
+    <TextView
+        android:id="@+id/tvSubjectName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nombre de la materia"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_marginBottom="4dp"/>
+
+    <TextView
+        android:id="@+id/tvSubjectDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Descripción"
+        android:layout_marginBottom="4dp"/>
+
+    <TextView
+        android:id="@+id/tvSubjectTeacher"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Profesor"
+        android:layout_marginBottom="12dp"/>
+
+    <!-- Lista de evaluaciones -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvEvaluations"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <!-- Botón visible solo para TEACHER -->
+    <Button
+        android:id="@+id/btnAddEvaluation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Agregar Evaluación"
+        android:visibility="gone"
+        android:layout_marginTop="8dp"/>
+</LinearLayout>

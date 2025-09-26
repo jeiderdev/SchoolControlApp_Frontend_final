@@ -51,21 +51,29 @@ interface ApiService {
     @POST("reset-password")
     suspend fun resetPassword(@Body body: ResetPasswordRequest): BasicResponse
 
-    // Grades
+    @GET("/evaluations/subject/{subjectId}")
+    suspend fun getEvaluationsBySubject(@Path("subjectId") subjectId: Int): List<EvaluationDto>
+
+    @POST("/evaluations")
+    suspend fun createEvaluation(@Body evaluation: CreateEvaluationDto): EvaluationDto
+
+    @GET("/evaluations/{id}")
+    suspend fun getEvaluationById(@Path("id") id: Int): EvaluationDto
+
     @GET("grades")
-    suspend fun getGrades(@Query("student_id") studentId: Int? = null): Response<List<GradeResponse>>
+    suspend fun getGrades(): List<GradeDto>
 
     @POST("grades")
-    suspend fun createGrade(@Body body: GradeCreate): Response<GradeResponse>
+    suspend fun createGrade(@Body grade: CreateGradeDto): GradeDto
 
     @PUT("grades/{id}")
-    suspend fun updateGrade(@Path("id") gradeId: Int, @Body grade: GradeCreate): Response<GradeResponse>
+    suspend fun updateGrade(@Path("id") id: Int, @Body grade: UpdateGradeDto): GradeDto
 
-    @DELETE("grades/{id}")
-    suspend fun deleteGrade(@Path("id") gradeId: Int): Response<BasicResponse>
+    @GET("/grades/evaluation/{evaluationId}")
+    suspend fun getGradesByEvaluation(@Path("evaluationId") evaluationId: Int): List<GradeDto>
 
-    @GET("ranking")
-    suspend fun getRanking(): Response<List<RankingItem>>
+    @GET("/grades/subject/{subjectId}")
+    suspend fun getGradesBySubject(@Path("subjectId") subjectId: Int): List<GradeDto>
 
 }
 

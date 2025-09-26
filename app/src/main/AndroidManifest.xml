@@ -17,6 +17,9 @@
         <activity android:name=".ui.ProfileActivity" />
         <activity android:name=".ui.CreateSubjectActivity" />
         <activity android:name=".ui.EditSubjectActivity"/>
+        <activity android:name=".ui.SubjectDetailActivity" />
+        <activity android:name=".ui.CreateEvaluationActivity" />
+        <activity android:name=".ui.GradesActivity" />
 
         <activity android:name=".ui.LoginActivity"
             android:exported="true">
