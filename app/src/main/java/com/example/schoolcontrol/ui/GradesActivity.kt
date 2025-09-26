@@ -1,36 +1,32 @@
 package com.example.schoolcontrol.ui
 
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolcontrol.R
 import com.example.schoolcontrol.api.ApiClient
-import com.example.schoolcontrol.models.CreateGradeDto
+import com.example.schoolcontrol.models.EnrollmentDto
 import com.example.schoolcontrol.models.GradeDto
 import com.example.schoolcontrol.ui.adapters.GradeAdapter
+import com.example.schoolcontrol.ui.dialogs.AddGradeDialog
 import kotlinx.coroutines.launch
 
 class GradesActivity : AppCompatActivity() {
 
     private lateinit var rvGrades: RecyclerView
     private var evaluationId: Int = 0
+    private var subjectId: Int = 0
     private var userRole: String? = null
 
     private lateinit var tvSubjectName: TextView
     private lateinit var tvSubjectDescription: TextView
     private lateinit var tvTeacherName: TextView
     private lateinit var btnAddGrade: Button
-
-    private lateinit var adapter: GradeAdapter
-    private var grades: MutableList<GradeDto> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,23 +35,29 @@ class GradesActivity : AppCompatActivity() {
         rvGrades = findViewById(R.id.rvGrades)
         rvGrades.layoutManager = LinearLayoutManager(this)
 
+        evaluationId = intent.getIntExtra("EVALUATION_ID", -1)
+        subjectId = intent.getIntExtra("SUBJECT_ID", -1)
+
+        val prefs = getSharedPreferences("APP_PREFS", 0)
+        userRole = prefs.getString("USER_ROLE", null)
+
         tvSubjectName = findViewById(R.id.tvSubjectName)
         tvSubjectDescription = findViewById(R.id.tvSubjectDescription)
         btnAddGrade = findViewById(R.id.btnAddGrade)
 
-        evaluationId = intent.getIntExtra("EVALUATION_ID", 0)
-        val prefs = getSharedPreferences("APP_PREFS", 0)
-        userRole = prefs.getString("USER_ROLE", null)
-
-        if (evaluationId == 0) {
-            Toast.makeText(this, "Error: evaluación no recibida", Toast.LENGTH_SHORT).show()
+        if (evaluationId < 0 || subjectId < 0) {
+            Toast.makeText(this, "Error: datos incompletos" + evaluationId + " " + subjectId, Toast.LENGTH_SHORT).show()
             finish()
         }
 
-        // Mostrar botón solo a TEACHER
+        // Botón solo para TEACHER
         if (userRole == "TEACHER") {
-            btnAddGrade.visibility = View.VISIBLE
-            btnAddGrade.setOnClickListener { showAddGradeDialog() }
+            btnAddGrade.visibility = Button.VISIBLE
+            btnAddGrade.setOnClickListener {
+                openAddGradeDialog()
+            }
+        } else {
+            btnAddGrade.visibility = Button.GONE
         }
 
         loadGrades()
@@ -65,8 +67,8 @@ class GradesActivity : AppCompatActivity() {
     private fun loadGrades() {
         lifecycleScope.launch {
             try {
-                grades = ApiClient.apiService.getGradesByEvaluation(evaluationId).toMutableList()
-                adapter = GradeAdapter(grades, userRole == "TEACHER")
+                val grades: List<GradeDto> = ApiClient.apiService.getGradesByEvaluation(evaluationId)
+                val adapter = GradeAdapter(grades.toMutableList(), userRole == "TEACHER")
                 rvGrades.adapter = adapter
             } catch (e: Exception) {
                 Toast.makeText(this@GradesActivity, "Error al cargar notas: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
@@ -81,48 +83,33 @@ class GradesActivity : AppCompatActivity() {
                 val subject = evaluation.subject
                 if (subject != null) {
                     tvSubjectName.text = "Materia: ${subject.name}"
-                    tvSubjectDescription.text = "Descripción: ${subject.description ?: "Sin descripción"}"
+                    tvSubjectDescription.text = "Descripción: ${subject.description}"
                 }
+
             } catch (e: Exception) {
                 Toast.makeText(this@GradesActivity, "Error cargando info: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun showAddGradeDialog() {
-        val dialogView = layoutInflater.inflate(R.layout.dialog_add_grade, null)
-        val etStudentId = dialogView.findViewById<EditText>(R.id.etStudentId)
-        val etScore = dialogView.findViewById<EditText>(R.id.etScore)
+    private fun openAddGradeDialog() {
+        lifecycleScope.launch {
+            try {
+                // Traer estudiantes inscritos en la materia
+                val enrollments: List<EnrollmentDto> = ApiClient.apiService.getEnrollmentsBySubject(subjectId)
 
-        AlertDialog.Builder(this)
-            .setTitle("Agregar Nota")
-            .setView(dialogView)
-            .setPositiveButton("Guardar") { _, _ ->
-                val studentId = etStudentId.text.toString().toIntOrNull()
-                val score = etScore.text.toString().toDoubleOrNull()
-
-                if (studentId != null && score != null) {
-                    lifecycleScope.launch {
-                        try {
-                            val newGrade = ApiClient.apiService.createGrade(
-                                CreateGradeDto(
-                                    evaluationId = evaluationId,
-                                    studentId = studentId,
-                                    score = score
-                                )
-                            )
-                            grades.add(newGrade)
-                            adapter.notifyItemInserted(grades.size - 1)
-                            Toast.makeText(this@GradesActivity, "Nota agregada", Toast.LENGTH_SHORT).show()
-                        } catch (e: Exception) {
-                            Toast.makeText(this@GradesActivity, "Error: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                } else {
-                    Toast.makeText(this, "Datos inválidos", Toast.LENGTH_SHORT).show()
+                if (enrollments.isEmpty()) {
+                    Toast.makeText(this@GradesActivity, "No hay estudiantes inscritos", Toast.LENGTH_SHORT).show()
+                    return@launch
                 }
+
+                // Abrir un diálogo para elegir estudiante + nota
+                val dialog = AddGradeDialog.newInstance(evaluationId, enrollments)
+                dialog.show(supportFragmentManager, "AddGradeDialog")
+
+            } catch (e: Exception) {
+                Toast.makeText(this@GradesActivity, "Error cargando estudiantes: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
             }
-            .setNegativeButton("Cancelar", null)
-            .show()
+        }
     }
 }

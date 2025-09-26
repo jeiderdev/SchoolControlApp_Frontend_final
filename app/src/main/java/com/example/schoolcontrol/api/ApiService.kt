@@ -27,22 +27,22 @@ interface ApiService {
     @GET("users/students")
     suspend fun getStudents(): List<UserDto>
 
-    @GET("/subjects")
+    @GET("subjects")
     suspend fun getSubjects(): List<SubjectDto>
 
-    @POST("/subjects")
+    @POST("subjects")
     suspend fun createSubject(@Body subject: CreateSubjectDto): SubjectDto
 
-    @GET("/subjects/{id}")
+    @GET("subjects/{id}")
     suspend fun getSubjectById(@Path("id") id: Int): SubjectDto
 
-    @PUT("/subjects/{id}")
+    @PUT("subjects/{id}")
     suspend fun updateSubject(@Path("id") id: Int, @Body subject: UpdateSubjectDto): SubjectDto
 
-    @POST("/enrollments")
+    @POST("enrollments")
     suspend fun enrollStudent(@Body enrollment: CreateEnrollmentDto): EnrollmentDto
 
-    @GET("/enrollments/subject/{subjectId}")
+    @GET("enrollments/subject/{subjectId}")
     suspend fun getEnrollmentsBySubject(@Path("subjectId") subjectId: Int): List<EnrollmentDto>
 
     @POST("forgot-password")
@@ -51,13 +51,13 @@ interface ApiService {
     @POST("reset-password")
     suspend fun resetPassword(@Body body: ResetPasswordRequest): BasicResponse
 
-    @GET("/evaluations/subject/{subjectId}")
+    @GET("evaluations/subject/{subjectId}")
     suspend fun getEvaluationsBySubject(@Path("subjectId") subjectId: Int): List<EvaluationDto>
 
-    @POST("/evaluations")
+    @POST("evaluations")
     suspend fun createEvaluation(@Body evaluation: CreateEvaluationDto): EvaluationDto
 
-    @GET("/evaluations/{id}")
+    @GET("evaluations/{id}")
     suspend fun getEvaluationById(@Path("id") id: Int): EvaluationDto
 
     @GET("grades")
@@ -69,10 +69,10 @@ interface ApiService {
     @PUT("grades/{id}")
     suspend fun updateGrade(@Path("id") id: Int, @Body grade: UpdateGradeDto): GradeDto
 
-    @GET("/grades/evaluation/{evaluationId}")
+    @GET("grades/evaluation/{evaluationId}")
     suspend fun getGradesByEvaluation(@Path("evaluationId") evaluationId: Int): List<GradeDto>
 
-    @GET("/grades/subject/{subjectId}")
+    @GET("grades/subject/{subjectId}")
     suspend fun getGradesBySubject(@Path("subjectId") subjectId: Int): List<GradeDto>
 
 }

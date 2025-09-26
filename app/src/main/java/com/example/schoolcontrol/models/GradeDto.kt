@@ -11,9 +11,9 @@ data class GradeDto(
     val evaluationId: Int,
     val score: Double,
     @SerializedName("created_at")
-    val createdAt: LocalDateTime,
+    val createdAt: String,
     @SerializedName("updated_at")
-    val updatedAt: LocalDateTime,
+    val updatedAt: String,
     val student: UserDto? = null,
     val evaluation: EvaluationDto? = null
 )

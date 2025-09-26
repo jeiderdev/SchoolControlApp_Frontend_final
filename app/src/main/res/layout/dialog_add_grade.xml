@@ -5,12 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/etStudentId"
+    <Spinner
+        android:id="@+id/spStudents"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="ID Estudiante"
-        android:inputType="number" />
+        android:layout_height="wrap_content" />
 
     <EditText
         android:id="@+id/etScore"

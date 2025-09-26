@@ -48,6 +48,7 @@ class EvaluationAdapter(
         holder.btnEditGrades.setOnClickListener {
             val intent = Intent(holder.itemView.context, GradesActivity::class.java)
             intent.putExtra("EVALUATION_ID", evaluation.id)
+            intent.putExtra("SUBJECT_ID", evaluation.subjectId)
             holder.itemView.context.startActivity(intent)
         }
     }
