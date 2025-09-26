@@ -1,3 +1,4 @@
+package com.example.schoolcontrol.models
 import com.google.gson.annotations.SerializedName
 
 enum class UserRole {
