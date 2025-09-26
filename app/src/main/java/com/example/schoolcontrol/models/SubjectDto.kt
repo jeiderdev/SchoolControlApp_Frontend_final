@@ -1,5 +1,7 @@
 package com.example.schoolcontrol.models
 
+import java.time.LocalDateTime
+
 data class SubjectDto(
     val id: Int,
     val name: String,

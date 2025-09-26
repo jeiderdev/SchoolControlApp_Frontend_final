@@ -1,5 +1,7 @@
 package com.example.schoolcontrol.models
 
+import java.time.LocalDateTime
+
 data class GradeDto(
     val id: Int,
     val studentId: Int,
