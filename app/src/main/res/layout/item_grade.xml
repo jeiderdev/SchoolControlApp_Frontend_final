@@ -19,7 +19,7 @@
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
-        android:hint="0.0"/>
+        android:hint="N/A"/>
 
     <Button
         android:id="@+id/btnSaveGrade"
