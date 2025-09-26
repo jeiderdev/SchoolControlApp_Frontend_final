@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Foto de perfil -->
+        <ImageView
+            android:id="@+id/ivProfilePhoto"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginBottom="12dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_round"
+            android:background="@android:color/darker_gray"
+            android:contentDescription="Foto de perfil" />
+        <!-- Email (solo lectura) -->
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:enabled="false"/>
+
+        <!-- Nombre (editable) -->
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre"/>
+
+        <!-- Identificación (editable) -->
+        <EditText
+            android:id="@+id/etIdentification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Identificación"/>
+
+        <!-- Edad (editable) -->
+        <EditText
+            android:id="@+id/etAge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Edad"
+            android:inputType="number"/>
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Contaseña"/>
+
+        <!-- Rol (solo lectura) -->
+        <EditText
+            android:id="@+id/etRole"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Rol"
+            android:enabled="false"/>
+
+        <!-- Estado de cuenta (solo lectura) -->
+        <EditText
+            android:id="@+id/etIsActive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Activo"
+            android:enabled="false"/>
+
+        <!-- Campo para URL de la foto -->
+        <EditText
+            android:id="@+id/etPhotoUrl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="URL de la foto" />
+
+        <!-- Botón Guardar -->
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Guardar"
+            android:layout_marginTop="16dp"/>
+    </LinearLayout>
+</ScrollView>

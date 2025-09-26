@@ -1,0 +1,6 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_correos" android:title="Correos" android:icon="@android:drawable/ic_dialog_email"/>
+    <item android:id="@+id/nav_notas" android:title="Notas" android:icon="@android:drawable/ic_menu_agenda"/>
+    <item android:id="@+id/nav_ranking" android:title="Ranking" android:icon="@android:drawable/ic_menu_sort_by_size"/>
+    <item android:id="@+id/nav_perfil" android:title="Perfil" android:icon="@android:drawable/ic_menu_myplaces"/>
+</menu>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <EditText
+        android:id="@+id/etStudentId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Student ID"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/etTeacherId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Teacher ID"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/etSubject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Asignatura" />
+
+    <EditText
+        android:id="@+id/etValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nota"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/etTrimester"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Trimestre"
+        android:inputType="number" />
+</LinearLayout>
