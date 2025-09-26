@@ -29,7 +29,6 @@ class EditSubjectActivity : AppCompatActivity() {
     private var subjectId: Int = 0
     private var enrollments: MutableList<EnrollmentDto> = mutableListOf()
     private var enrollmentAdapter: EnrollmentAdapter? = null
-    private var allUsers: List<UserDto> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +58,11 @@ class EditSubjectActivity : AppCompatActivity() {
         btnSave.setOnClickListener { updateSubject() }
 
         // Agregar estudiante
-        btnAddEnrollment.setOnClickListener { showAddStudentDialog() }
+        btnAddEnrollment.setOnClickListener {
+            lifecycleScope.launch {
+                showAddStudentDialog()
+            }
+        }
     }
 
     private fun loadSubject() {
@@ -73,9 +76,6 @@ class EditSubjectActivity : AppCompatActivity() {
                 enrollments.clear()
                 enrollments.addAll(enr)
                 enrollmentAdapter?.notifyDataSetChanged()
-
-                // Cargar todos los usuarios para matricular
-                allUsers = ApiClient.apiService.getStudents()
             } catch (e: Exception) {
                 Toast.makeText(this@EditSubjectActivity, "Error al cargar materia: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
             }
@@ -97,17 +97,9 @@ class EditSubjectActivity : AppCompatActivity() {
         }
     }
 
-    private fun showAddStudentDialog() {
-        // Filtrar estudiantes que no estén ya matriculados
-        val enrolledIds = enrollments.map { it.studentId }.toSet()
-        val availableStudents = allUsers.filter { it.id !in enrolledIds }
-
-        if (availableStudents.isEmpty()) {
-            Toast.makeText(this, "Todos los estudiantes ya están matriculados", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        val studentNames = availableStudents.map { it.name }
+    private suspend fun showAddStudentDialog() {
+        var unenrolledStudents = ApiClient.apiService.getUnenrolledStudents(subjectId)
+        val studentNames = unenrolledStudents.map { it.name }
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Selecciona un estudiante")
         val listView = ListView(this)
@@ -116,7 +108,7 @@ class EditSubjectActivity : AppCompatActivity() {
         builder.setView(listView)
         val dialog = builder.create()
         listView.setOnItemClickListener { _, _, position, _ ->
-            val selectedUser = availableStudents[position]
+            val selectedUser = unenrolledStudents[position]
             enrollStudent(selectedUser.id)
             dialog.dismiss()
         }

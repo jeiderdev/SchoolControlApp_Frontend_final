@@ -5,14 +5,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Botón agregar usuario -->
     <Button
         android:id="@+id/btnAddUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Agregar Usuario"
         android:layout_gravity="end"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="12dp"/>
 
+    <!-- Menú horizontal de roles -->
+    <RadioGroup
+        android:id="@+id/rgRoles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rbStudents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Students"
+            android:checked="true"/> <!-- default -->
+
+        <RadioButton
+            android:id="@+id/rbTeachers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Teachers"/>
+
+        <RadioButton
+            android:id="@+id/rbAdmins"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Admins"/>
+    </RadioGroup>
+
+    <!-- Lista de usuarios -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvUsers"
         android:layout_width="match_parent"

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -24,14 +25,16 @@ class UsersFragment : Fragment() {
 
     private lateinit var rvUsers: RecyclerView
     private lateinit var btnAddUser: Button
+    private lateinit var rgRoles: RadioGroup
 
-    // 🔹 Lanzador para abrir RegisterActivity y recibir resultado
+    // 🔹 Rol actual (por defecto "students")
+    private var currentRole: String = "students"
+
     private val registerLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         if (result.resultCode == AppCompatActivity.RESULT_OK) {
-            // Usuario creado, recargar la lista
-            loadUsers()
+            loadUsers(currentRole)
         }
     }
 
@@ -43,28 +46,48 @@ class UsersFragment : Fragment() {
 
         rvUsers = view.findViewById(R.id.rvUsers)
         btnAddUser = view.findViewById(R.id.btnAddUser)
+        rgRoles = view.findViewById(R.id.rgRoles)
 
         rvUsers.layoutManager = LinearLayoutManager(requireContext())
 
-        loadUsers()
+        // Cargar estudiantes al inicio
+        loadUsers("students")
+
+        // 🔹 Cambiar de rol según selección
+        rgRoles.setOnCheckedChangeListener { _, checkedId ->
+            currentRole = when (checkedId) {
+                R.id.rbStudents -> "students"
+                R.id.rbTeachers -> "teachers"
+                R.id.rbAdmins -> "admins"
+                else -> "students"
+            }
+            loadUsers(currentRole)
+        }
 
         btnAddUser.setOnClickListener {
-            // Abrir RegisterActivity usando el launcher
             registerLauncher.launch(Intent(requireContext(), RegisterActivity::class.java))
         }
 
         return view
     }
 
-    private fun loadUsers() {
+    private fun loadUsers(role: String) {
         lifecycleScope.launch {
             try {
-                val users: List<UserDto> = ApiClient.apiService.getAllUsers()
+                val users: List<UserDto> = when (role) {
+                    "students" -> ApiClient.apiService.getStudents()
+                    "teachers" -> ApiClient.apiService.getTeachers()
+                    "admins" -> ApiClient.apiService.getAdmins()
+                    else -> emptyList()
+                }
                 rvUsers.adapter = UserAdapter(users)
             } catch (e: Exception) {
-                Toast.makeText(requireContext(), "Error cargando usuarios: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Error cargando $role: ${e.localizedMessage}",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
 }
-

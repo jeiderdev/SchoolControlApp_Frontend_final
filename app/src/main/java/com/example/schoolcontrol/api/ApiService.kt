@@ -27,6 +27,12 @@ interface ApiService {
     @GET("users/students")
     suspend fun getStudents(): List<UserDto>
 
+    @GET("users/admins")
+    suspend fun getAdmins(): List<UserDto>
+
+    @GET("users/unenrolled-students/{subjectId}")
+    suspend fun getUnenrolledStudents(@Path("subjectId") subjectId: Int): List<UserDto>
+
     @GET("subjects")
     suspend fun getSubjects(): List<SubjectDto>
 
