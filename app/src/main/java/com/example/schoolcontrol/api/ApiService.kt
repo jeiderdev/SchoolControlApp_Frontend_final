@@ -9,14 +9,26 @@ interface ApiService {
     @POST("users/login")
     suspend fun login(@Body request: LoginDto): TokenDto
 
-    @POST("register")
-    suspend fun register(@Body body: UserCreateRequest): RegisterResponse
+    @POST("users/register")
+    suspend fun register(@Body body: CreateUserDto): UserDto
 
-    @GET("me")
-    suspend fun me(): UserResponse
+    @GET("users/me")
+    suspend fun me(): UserDto
 
-    @PUT("me")
-    suspend fun updateMe(@Body body: UserUpdateRequest): Response<UserResponse>
+    @PUT("users/me")
+    suspend fun updateMe(@Body body: UpdateUserDto): UserDto
+
+    @GET("users")
+    suspend fun getAllUsers(): List<UserDto>
+
+    @GET("users/teachers")
+    suspend fun getTeachers(): List<UserDto>
+
+    @GET("/subjects")
+    suspend fun getSubjects(): List<SubjectDto>
+
+    @POST("/subjects")
+    suspend fun createSubject(@Body subject: CreateSubjectDto): SubjectDto
 
     @POST("forgot-password")
     suspend fun forgotPassword(@Body body: ForgotPasswordRequest): ForgotResponse

@@ -19,6 +19,7 @@
             android:src="@drawable/ic_launcher_round"
             android:background="@android:color/darker_gray"
             android:contentDescription="Foto de perfil" />
+
         <!-- Email (solo lectura) -->
         <EditText
             android:id="@+id/etEmail"
@@ -50,11 +51,13 @@
             android:hint="Edad"
             android:inputType="number"/>
 
+        <!-- Contraseña (editable) -->
         <EditText
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Contaseña"/>
+            android:hint="Contraseña"
+            android:inputType="textPassword"/>
 
         <!-- Rol (solo lectura) -->
         <EditText
@@ -64,15 +67,7 @@
             android:hint="Rol"
             android:enabled="false"/>
 
-        <!-- Estado de cuenta (solo lectura) -->
-        <EditText
-            android:id="@+id/etIsActive"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Activo"
-            android:enabled="false"/>
-
-        <!-- Campo para URL de la foto -->
+        <!-- URL de la foto (editable) -->
         <EditText
             android:id="@+id/etPhotoUrl"
             android:layout_width="match_parent"

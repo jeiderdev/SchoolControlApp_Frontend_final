@@ -1,12 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent">
-<LinearLayout android:orientation="vertical" android:padding="24dp" android:layout_width="match_parent" android:layout_height="wrap_content">
-    <TextView android:text="Registro" android:textSize="24sp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-    <EditText android:id="@+id/etRegEmail" android:hint="Correo" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/input_bg" android:padding="12dp"/>
-    <EditText android:id="@+id/etRegPass" android:hint="Contraseña" android:inputType="textPassword" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/input_bg" android:padding="12dp"/>
-    <EditText android:id="@+id/etRegName" android:hint="Nombre completo" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/input_bg" android:padding="12dp"/>
-    <EditText android:id="@+id/etRegId" android:hint="Número de identificación" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/input_bg" android:padding="12dp"/>
-    <EditText android:id="@+id/etRegAge" android:hint="Edad" android:inputType="number" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/input_bg" android:padding="12dp"/>
-    <Button android:id="@+id/btnRegister" android:text="Crear cuenta" android:layout_marginTop="16dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:backgroundTint="@color/primary" android:textColor="@android:color/white"/>
-</LinearLayout>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre"/>
+
+        <EditText
+            android:id="@+id/etIdNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Número de identificación"
+            android:inputType="number"/>
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:inputType="textEmailAddress"/>
+
+        <EditText
+            android:id="@+id/etAge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Edad"
+            android:inputType="number"/>
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Contraseña"
+            android:inputType="textPassword"/>
+
+        <!-- Rol: Spinner para seleccionar role -->
+        <Spinner
+            android:id="@+id/spinnerRole"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"/>
+
+        <EditText
+            android:id="@+id/etPhotoUrl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="URL de la foto (opcional)"
+            android:layout_marginTop="8dp"/>
+
+        <Button
+            android:id="@+id/btnRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registrar"
+            android:layout_marginTop="16dp"/>
+    </LinearLayout>
 </ScrollView>

@@ -16,5 +16,4 @@ data class UserDto(
     val grades: List<GradeDto> = emptyList(),
     @SerializedName("created_at") val createdAt: String,
     @SerializedName("updated_at") val updatedAt: String
-
 )

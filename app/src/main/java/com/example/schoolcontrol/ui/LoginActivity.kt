@@ -37,10 +37,12 @@ class LoginActivity: AppCompatActivity() {
                     TokenHolder.accessToken = resp.accessToken
                     TokenHolder.tokenType = resp.tokenType
 
+                    val user = resp.user
                     val prefs = getSharedPreferences("APP_PREFS", MODE_PRIVATE)
                     prefs.edit()
                         .putString("TOKEN", resp.accessToken)
                         .putString("TOKEN_TYPE", resp.tokenType)
+                        .putString("USER_ROLE", user.role.toString())
                         .apply()
 
                     startActivity(Intent(this@LoginActivity, MainActivity::class.java))
