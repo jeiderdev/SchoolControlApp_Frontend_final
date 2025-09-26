@@ -1,6 +1,6 @@
 package com.example.schoolcontrol.models
 
-data class LoginRequest(
+data class LoginDto(
     val username: String,
     val password: String
 )
